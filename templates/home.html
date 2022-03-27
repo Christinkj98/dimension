@@ -1,0 +1,518 @@
+{% extends 'index.html'%}
+{%load static%}
+{% block content %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"
+    integrity="sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@6.5.95/css/materialdesignicons.min.css">
+
+
+<style>
+    * {
+        
+        text-decoration: none;
+    }
+
+    .first {
+        background-image: url('/static/dimen.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 90vh;
+    }
+
+    .photo-grid {
+        display: grid;
+        gap: 1rem;
+
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        grid-auto-rows: 240px;
+    }
+
+    .image__overlay {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        color: #ffffff;
+        font-family: 'Quicksand', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.25s;
+    }
+
+    .image__overlay--blur {
+        backdrop-filter: blur(5px);
+    }
+
+    .image__overlay>* {
+        transform: translateY(20px);
+        transition: transform 0.25s;
+    }
+
+    .image__overlay:hover {
+        opacity: 1;
+    }
+
+    .image__overlay:hover>* {
+        transform: translateY(0);
+    }
+
+    .image__title {
+        font-size: 1.75em;
+        font-weight: bold;
+        color: white;
+        text-decoration: none;
+    }
+
+    .image__description {
+        font-size: 1.25em;
+        margin-top: 0.25em;
+        color: white;
+        text-decoration: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: white;
+        text-align: center;
+    }
+
+    .nav-link {
+        color: white;
+    }
+
+    /* Medium screens */
+    @media screen and (min-width: 600px) {
+        .card-tall {
+            grid-row: span 2 / auto;
+        }
+
+        .card-wide {
+            grid-column: span 2 / auto;
+        }
+    }
+    .conf{
+        margin-top: 100px;
+    }
+  
+</style>
+
+<body style="background-color: #082835;">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 first">
+                <div class="row">
+                    <div class="col-md-6 col-9 offset-md-3 offset-2" style="margin-top: 150px;">
+                        <h1 style="text-align: center;color: white;">DimenZions</h1>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-9 offset-md-3 offset-2">
+                        <h3 style="text-align: center;color: white;">Get exciting 3D models from here</h3>
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-md-5 col-9 mx-auto">
+                        <div class="input-group">
+                            <input type="text" class="form-control">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container-fluid">
+            <div class="row" style="text-align: center;">
+                <div class="col-lg-3 col-md-2"></div>
+                <div class="col-lg-9 col-md-8">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-bs-toggle="tab" href="#home">ALL</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#profile">CARS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#contact">CHARACTERS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#animals">ANIMALS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#vehicles">VEHICLES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#architecture">ARCHITECTURE</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#furniture">FURNITURE</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#anantomy">ANATOMY</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#landscapes">LANDSCAPES</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-bs-toggle="tab" href="#technology">TECHNOLOGY</a>
+                        </li>
+                    </ul>
+                    <hr style="color: white;">
+                </div>
+                <div class="col-lg-1 col-md-2"></div>
+            </div>
+        </div>
+    </nav><br>
+    <div class="tab-content">
+        <div class="tab-pane active" id="home">
+            <div class="container">
+                <div class="row">
+                    <div class="photo-grid">
+                        <div class="card image__img card-tall card-wide"
+                            style="background-image:url('https://images.unsplash.com/photo-1558981359-219d6364c9c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+                                    <div class="image__title">Vehicle<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick walls.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card card-tall"
+                            style="background-image:url('https://images.unsplash.com/photo-1583585635793-0e1894c169bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=913&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+
+                                    <div class="image__title">CHARACTER<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                                    </div>
+
+                                    <p class="image__description">
+                                        Here we have a brick walli.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="card"
+                            style="background-image:url('https://images.unsplash.com/photo-1583531172005-814191b8b6c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+                                    <div class="image__title">ANIMALS<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick wall.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card"
+                            style="background-image:url('https://images.unsplash.com/photo-1583426573939-97d09302d76a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=968&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+                                    <div class="image__title">VEHICLES<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick wall.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card"
+                            style="background-image:url('https://images.unsplash.com/photo-1583532452513-a02186582ccd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1  %}">
+                                    <div class="image__title">ARCHITECH<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick wall.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card"
+                            style="background-image:url('https://images.unsplash.com/photo-1583445013765-46c20c4a6772?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+                                    <div class="image__title">FURNITURE<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick wall.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card card-wide"
+                            style="background-image:url('https://images.unsplash.com/photo-1583562835057-a62d1beffbf3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=949&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+                                    <div class="image__title">ANATOMY<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick wall.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card"
+                            style="background-image:url('https://images.unsplash.com/photo-1583483425010-c566431a7710?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+                                    <div class="image__title">LANDSCAPE<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick wall.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card"
+                            style="background-image:url('https://images.unsplash.com/photo-1583500557349-fb5238f8d946?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1949&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+                                    <div class="image__title">TECHNO<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -18px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick wall.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="profile">
+            <div class="container">
+                <div class="row">
+                    <div class="photo-grid">
+                        <div class="card image__img card-tall card-wide"
+                            style="background-image:url('https://images.unsplash.com/photo-1558981359-219d6364c9c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+                                    <div class="image__title">pro<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -10px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick walls.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card card-tall"
+                            style="background-image:url('https://images.unsplash.com/photo-1583585635793-0e1894c169bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=913&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+
+                                    <div class="image__title">prism<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -10px; margin-left: 5px;">></span>
+                                    </div>
+
+                                    <p class="image__description">
+                                        Here we have a brick walli.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="card"
+                            style="background-image:url('https://images.unsplash.com/photo-1583531172005-814191b8b6c0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+                                    <div class="image__title">Bricks<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -10px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick wall.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane" id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="photo-grid">
+                        <div class="card image__img card-tall card-wide"
+                            style="background-image:url('https://images.unsplash.com/photo-1558981359-219d6364c9c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+                                    <div class="image__title">third<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -10px; margin-left: 5px;">></span>
+                                    </div>
+                                    <p class="image__description">
+                                        Here we have a brick walls.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card card-tall"
+                            style="background-image:url('https://images.unsplash.com/photo-1583585635793-0e1894c169bd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=913&q=80')">
+                            <div class="image__overlay image__overlay--blur">
+                                <a href="{% url 'new_page' 1 %}">
+
+                                    <div class="image__title">blah<span
+                                            style="position: absolute; font-size: 50px;color: skyblue;margin-top: -10px; margin-left: 5px;">></span>
+                                    </div>
+
+                                    <p class="image__description">
+                                        Here we have a brick walli.
+                                    </p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container conf">
+        <div class="row">
+            <div class="col-12">
+                <h1 style="color:white">Complete Confidence</h1>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-2">
+                <div style="height: 125px;width: 125px; background-color: #11303d; border-radius: 40%;padding:12px ">
+                   
+                    <span class="iconify"  data-icon="arcticons:priceconverter" style="color:gold;"  data-width="100"></span>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col">
+                        <br>
+                        <h3 style="color: white;">Best Price Guarantee</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p style="line-height: 30px;color: #9eb9c4;">
+                            Buy with confidence - we guarantee that you won't find any model
+                            on our site selling for a lower price on any other marketplace.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-2">
+                <div style="height: 125px;width: 125px; background-color: #11303d; border-radius: 40%;padding:12px ">
+                   
+                    <span class="iconify"  data-icon="arcticons:priceconverter" style="color:gold;"  data-width="100"></span>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col">
+                        <br>
+                        <h3 style="color: white;">Simple Returns</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p style="line-height: 30px;color: #9eb9c4;">
+                            Did you purchase a model that doesn’t work for you? No problem,
+                             we’ll give you a quick refund or store credit so you can find a model that works for your project.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <div style="height: 125px;width: 125px; background-color: #11303d; border-radius: 40%;padding:12px ">
+                   
+                    <span class="iconify"  data-icon="arcticons:priceconverter" style="color:gold;"  data-width="100"></span>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col">
+                        <br>
+                        <h3 style="color: white;">24/7 Support</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p style="line-height: 30px;color: #9eb9c4;">
+                            We’re here to help when you need us. Professionals
+                             are ready to assist you every hour of every day with your 3D model purchase via chat or support ticket.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-2">
+                <div style="height: 125px;width: 125px; background-color: #11303d; border-radius: 40%;padding:12px ">
+                   
+                    <span class="iconify"  data-icon="arcticons:priceconverter" style="color:gold;"  data-width="100"></span>
+                </div>
+
+            </div>
+            <div class="col-4">
+                <div class="row">
+                    <div class="col">
+                        <br>
+                        <h3 style="color: white;">World Class Protection</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <p style="line-height: 30px;color: #9eb9c4;">
+                            Dimensions leads the industry with up to $1,000,000 in
+                             indemnification available on your 3D model purchases.
+                              If there’s ever any problem with the purchase, we’ll be there to help.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
+        <script src="https://use.fontawesome.com/b0261d4fc2.js"></script>
+        <script src="https://code.iconify.design/2/2.2.0/iconify.min.js"></script>
+    <br><br>
+
+</body>
+
+</html>
+{% endblock %}
