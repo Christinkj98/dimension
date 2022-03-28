@@ -71,12 +71,12 @@
 
     <section class="basic-grid">
         {% for i in man1%}
-        <div class="card" 
+        <a style="text-decoration: none;" href="{% url 'modelshow' i.id%}" ><div class="card" 
         style="background-image:url({{i.gib.url}})">
         
         <p id="p">{{i.modelname}}</p>
         
-    </div>
+    </div></a>
     {% endfor %}
     </section>
 

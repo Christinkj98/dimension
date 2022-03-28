@@ -12,6 +12,9 @@ from datetime import date
 
 def home(request):
     return render(request, 'home.html') 
+def modelshow(request,id):
+    model = items.objects.get(id=id)
+    return render(request, 'modelshow.html',{'model':model})  
 def new_page(request,id):
     man1 = items.objects.filter(cat_id_id = id)
     man = categories.objects.get(cat_id = id)
@@ -43,8 +46,14 @@ def admin_login(request):
                 member = Admin_register.objects.get(username = request.POST['username'], password = request.POST['password'])
                 request.session['admid'] = member.reg_id
                 return redirect('admin_dashboard')
-            else:
+            
+            elif Admin_register.objects.filter(username = request.POST['username'], password = request.POST['password'],designation="").exists():
+                member = Admin_register.objects.get(username = request.POST['username'], password = request.POST['password'])
+                request.session['admid'] = member.reg_id
                 return redirect('home')
+            
+            else:
+                return redirect('admin_log')
         else:
             return redirect('admin_log')
  
@@ -142,7 +151,7 @@ def registeredusers(request):
 
 def delete(request, reg_id):
     admid = request.session['admid']
-    use = Admin_register.objects.get(reg_id=admid)
+    use = Admin_register.objects.get(reg_id=reg_id)
     use.delete()
     return redirect('registeredusers')
 
@@ -169,7 +178,7 @@ def modeledit(request,id):
         item.fbx=request.FILES.get('fbx',item.fbx)
     
         item.save()
-        return render(request, 'adminedit.html',{'item':item})
+        return redirect('admin_current_models')
 
 
 
